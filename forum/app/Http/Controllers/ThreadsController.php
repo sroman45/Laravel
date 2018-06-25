@@ -53,7 +53,7 @@ class ThreadsController extends Controller
         $this->validate( $request, [
            'title' => 'required',
            'body' => 'required',
-           'channel_id'> 'required|exists:channel, id'
+           'channel_id' => 'required|exists:channel,id'
         ]);
 
         $thread = Thread::create([
