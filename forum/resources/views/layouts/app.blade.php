@@ -19,6 +19,24 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .level
+        {
+            display: flex;
+            align-items: center;
+        }
+
+        .flex
+        {
+            flex: 1;
+        }
+
+        a
+        {
+            color: #3E8BB6;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -35,9 +53,12 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/threads">All Threads</a>
+                            
                             @if (auth()->check())
                                 <a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
                             @endif
+
+                            <a href="/threads?popular=1" class="dropdown-item">Popular Threads</a>
                         </div>
                     </li>
 
