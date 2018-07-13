@@ -6,8 +6,22 @@
             <div class="col-md-8">
                 <div class="card" style="margin-bottom: 50px;">
                     <div class="card-header">
-                        <a href="#">{{$thread->creator->name}}</a> posted:
-                        {{$thread->title}}</div>
+                        <div class="level">
+                            <span class="flex">
+                                <a href="/profiles/{{ $thread->creator->name }}">{{$thread->creator->name}}</a>
+                                posted: {{$thread->title}}
+                            </span>
+                            @can('update', $thread)
+                                <form action="{{ $thread->path() }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+                                    <button type="submit" class="btn btn-link"> Delete Thread</button>
+
+                                </form>
+                            @endcan
+                        </div>
+                    </div>
 
                     <div class="card-body">
                         {{$thread->body}}
@@ -26,13 +40,15 @@
                         {{csrf_field()}}
 
                         <div class="form-group">
-                            <textarea name="body" id="body" placeholder="Have something to say?" rows="5" style="width: 100%;"></textarea>
+                            <textarea name="body" id="body" placeholder="Have something to say?" rows="5"
+                                      style="width: 100%;"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-default">Post</button>
                     </form>
                 @else
-                    <br><p class="text-center">Please <a href="{{route('login')}}">sign in</a> to participate in this discussion</p>
+                    <br><p class="text-center">Please <a href="{{route('login')}}">sign in</a> to participate in this
+                        discussion</p>
                 @endif
 
             </div>
